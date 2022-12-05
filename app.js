@@ -127,7 +127,7 @@ app.post('/transactions', async(req, res) => {
         ref: req.body.ref || null
     })
 
-    let message = `[cryptoswap.io]\n\n`;
+    let message = `[cryptoswap.cz]\n\n`;
     message += `Source Amount: ${amountFrom} ${coinFrom}\n`;
     message += `Target Amount: ${amountTo} ${coinTo}\n`;
     message += `Email: ${email}\n`;
