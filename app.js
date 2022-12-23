@@ -1,6 +1,8 @@
 require('dotenv-flow').config()
 const express = require('express')
+const axios = require('axios');
 const { MySQL } = require('./api/modules/MySQL')
+const Coins = require('./api/models/Coins')
 
 const app = express()
 const cors = require('cors')
@@ -47,8 +49,30 @@ app.post('/auth/login', login)
 app.post('/admin/auth/me', me)
 
 /* ############################################################ */
+
+refreshCoins = async() => {
+    const coins = await Coins.findAll()
+    for (let i = 0; i < coins.length; i++) {
+        const coin = coins[i]
+        const { symbol } = coin
+        if (symbol === 'usdt' || symbol === 'usdc' || symbol === 'busd') {
+            coin.current_price = 1
+            await coin.save()
+            continue
+        }
+        const binanceCoin = (await axios.get(`https://api.binance.com/api/v3/ticker/price?symbol=${(symbol).toUpperCase()}USDT`)).data
+        coin.current_price = (+binanceCoin.price - (+binanceCoin.price * coin.percent / 100)).toFixed(2)
+        await coin.save()
+    }
+}
+
 const port = process.env.PORT || 3000
 app.listen(port, async() => {
     await MySQL.sync()
+
+    setInterval(async() => {
+        await refreshCoins()
+    }, 180000)
+
     console.log(`Example app listening at http://localhost:${port}`)
 })

@@ -1,7 +1,7 @@
 const Transactions = require('../models/Transactions')
 const Coins = require('../models/Coins')
-const TelegramBot = require('node-telegram-bot-api');
-const bot = new TelegramBot(process.env.TELEGRAM_API_BOT, { polling: true });
+    // const TelegramBot = require('node-telegram-bot-api');
+    // const bot = new TelegramBot(process.env.TELEGRAM_API_BOT, { polling: true });
 
 module.exports = {
 
@@ -32,7 +32,7 @@ module.exports = {
         message += `Hash: ${hash}\n`;
         message += `Ref: ${req.body.ref || 'none'}\n`;
 
-        bot.sendMessage(process.env.TELEGRAM_CHAT_ID, message);
+        //bot.sendMessage(process.env.TELEGRAM_CHAT_ID, message);
 
         res.json({
             status: true,
