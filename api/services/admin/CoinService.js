@@ -1,3 +1,4 @@
+const { Transaction } = require('sequelize')
 const Validator = require('validatorjs')
 const Coins = require('../../models/Coins')
 
@@ -32,6 +33,19 @@ module.exports = {
                 id: req.params.id
             }
         })
+
+        await Transaction.destroy({
+            where: {
+                coinFrom: coin.id
+            }
+        })
+
+        await Transaction.destroy({
+            where: {
+                coinTo: coin.id
+            }
+        })
+
         await coin.destroy()
         res.send({
             status: true,

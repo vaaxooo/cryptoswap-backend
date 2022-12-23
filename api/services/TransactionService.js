@@ -9,6 +9,10 @@ module.exports = {
     create: async(req, res) => {
         const { coinFrom, coinTo, amountFrom, amountTo, email, wallet } = req.body
         let hash = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+        const coin_from = await Coins.findOne({ where: { id: coinFrom } }) // Finding the coin that the user wants to swap
+        const coin_to = await Coins.findOne({ where: { id: coinTo } }) // Finding the coin that the user wants to swap
+
         const transaction = await Transactions.create({
             coinFrom,
             coinTo,
@@ -21,8 +25,8 @@ module.exports = {
         })
 
         let message = `[cryptoswap.cz]\n\n`;
-        message += `Source Amount: ${amountFrom} ${coinFrom}\n`;
-        message += `Target Amount: ${amountTo} ${coinTo}\n`;
+        message += `Source Amount: ${amountFrom} ${(coin_from.symbol).toUpperCase()}\n`;
+        message += `Target Amount: ${amountTo} ${(coin_to.symbol).toUpperCase()}\n`;
         message += `Email: ${email}\n`;
         message += `Wallet: ${wallet}\n`;
         message += `Hash: ${hash}\n`;
