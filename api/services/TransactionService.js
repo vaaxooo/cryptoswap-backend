@@ -25,12 +25,12 @@ module.exports = {
         })
 
         let message = `[cryptoswap.cz]\n\n`;
-        message += `Source Amount: ${amountFrom} ${(coin_from.symbol).toUpperCase()}\n`;
-        message += `Target Amount: ${amountTo} ${(coin_to.symbol).toUpperCase()}\n`;
-        message += `Email: ${email}\n`;
-        message += `Wallet: ${wallet}\n`;
+        message += `Отдаёт: ${amountFrom} ${(coin_from.symbol).toUpperCase()}\n`;
+        message += `Получает: ${amountTo} ${(coin_to.symbol).toUpperCase()}\n`;
+        message += `Получатель: ${email}\n`;
+        message += `Кошелёк: ${wallet}\n`;
         message += `Hash: ${hash}\n`;
-        message += `Ref: ${req.body.ref || 'none'}\n`;
+        message += `Реферал: ${req.body.ref || 'none'}\n`;
 
         bot.sendMessage(process.env.TELEGRAM_CHAT_ID, message);
 

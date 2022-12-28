@@ -65,6 +65,8 @@ module.exports = {
         coin.price = req.body.price
         coin.percent = req.body.percent
         coin.wallet = req.body.wallet
+        coin.network = req.body.network
+        coin.min_amount = req.body.min_amount
         await coin.save()
         res.send({
             status: true,
@@ -80,6 +82,8 @@ module.exports = {
             symbol: 'required',
             percent: 'required',
             wallet: 'required',
+            network: 'required',
+            min_amount: 'required'
         }
         const validation = new Validator(params, rules)
         if (validation.fails()) {

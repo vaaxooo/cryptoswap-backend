@@ -23,6 +23,14 @@ const Coins = MySQL.define('coins', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    network: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    min_amount: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     current_price: {
         type: DataTypes.STRING,
         allowNull: false,
