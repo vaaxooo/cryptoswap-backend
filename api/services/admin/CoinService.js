@@ -67,6 +67,7 @@ module.exports = {
         coin.wallet = req.body.wallet
         coin.network = req.body.network
         coin.min_amount = req.body.min_amount
+        coin.reserve = req.body.reserve
         await coin.save()
         res.send({
             status: true,
@@ -83,7 +84,8 @@ module.exports = {
             percent: 'required',
             wallet: 'required',
             network: 'required',
-            min_amount: 'required'
+            min_amount: 'required',
+            reserve: 'required'
         }
         const validation = new Validator(params, rules)
         if (validation.fails()) {
@@ -96,7 +98,10 @@ module.exports = {
             name: req.body.name,
             symbol: (req.body.symbol).toLowerCase(),
             percent: req.body.percent,
-            wallet: req.body.wallet
+            wallet: req.body.wallet,
+            network: req.body.network,
+            min_amount: req.body.min_amount,
+            reserve: req.body.reserve,
         })
         res.send({
             status: true,
