@@ -23,6 +23,10 @@ const Coins = MySQL.define('coins', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    reserve: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     network: {
         type: DataTypes.STRING,
         allowNull: false,

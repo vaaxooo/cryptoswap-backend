@@ -35,10 +35,6 @@ const Transactions = MySQL.define('transactions', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    reserve: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     ref: {
         type: DataTypes.STRING,
         allowNull: true
