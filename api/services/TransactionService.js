@@ -93,6 +93,29 @@ module.exports = {
                 message: 'Transaction is not pending'
             })
         }
+    },
+
+    /* A function that is called when a user visits the /transactions/:id route. It finds a transaction
+            with the hash that is in the URL and returns it. */
+    paid: async(req, res) => {
+        const transaction = await Transactions.findOne({
+            where: {
+                hash: req.params.id
+            }
+        })
+        if (transaction.status == 'pending') {
+            transaction.status = 'paid'
+            transaction.save()
+            res.json({
+                status: true,
+                data: transaction
+            })
+        } else {
+            res.json({
+                status: false,
+                message: 'Transaction is not pending'
+            })
+        }
     }
 
 }

@@ -12,7 +12,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const { create, cancel, get } = require('./api/services/TransactionService')
+const { create, cancel, get, paid } = require('./api/services/TransactionService')
 const { getTransactions, getTransaction, setStatus } = require('./api/services/admin/TransactionService')
 
 const { getUserCoins, getUserCoin } = require('./api/services/CoinService')
@@ -28,6 +28,7 @@ app.use('/admin', Authorized)
 
 app.get('/transactions/:id', get)
 app.get('/transactions/:id/cancel', cancel)
+app.get('/transactions/:id/paid', paid)
 app.post('/transactions', create)
 
 app.get('/coins', getUserCoins)
